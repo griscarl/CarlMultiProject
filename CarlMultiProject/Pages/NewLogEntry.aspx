@@ -123,13 +123,6 @@
                                     <asp:Button ID="Button_ConfirmLogEntry" CssClass="form-control btn-success btn-block" runat="server" Text="Confirm Log entry" OnClick="Button_ConfirmLogEntry_Click" />
                                 </div>
                             </div>
-                        </div><div class="row">
-                            <div class="col-6 mx-auto">
-                                <div class="form-group">
-                                    <asp:Button ID="Button1" type="button" CssClass="form-control btn-success btn-block" runat="server"  data-target="#exampleModalCenter" Text="Try Modal"/>
-                                    <!-- Modal --> 
-                                </div>
-                            </div>
                         </div>
                         <%--<a href="https://www.youtube.com/watch?v=oHg5SJYRHA0" class="btn btn-primary">Login</a>--%>
                     </div>
