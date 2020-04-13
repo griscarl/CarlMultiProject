@@ -12,9 +12,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <center>
-                                    <h3>User Login</h3>
-                                </center>
+                                <h3>User Login</h3>
                             </div>
                         </div>
                         <div class="row">

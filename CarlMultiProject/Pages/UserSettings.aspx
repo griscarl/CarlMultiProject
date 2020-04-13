@@ -7,10 +7,8 @@
         <div class="row">
             <div class="col-10 mx-auto">
                 <div class="card">
-                    <center>
                     <img  class="rounded mx-auto d-block img-fluid" src="../Images/settings.png" />
                     <h3>Settings!</h3>
-                    </center>
                     <div class="row">
                         <div class="col">
                             <hr />

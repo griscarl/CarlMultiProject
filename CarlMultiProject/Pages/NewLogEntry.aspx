@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <div class="card">
-                    <img src="../Images/logbook_big.jpg" width="100px" class="card-img-top">
+                    <img src="../Images/logbook_big.jpg" width="100" class="card-img-top">
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
