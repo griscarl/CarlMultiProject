@@ -88,7 +88,7 @@ namespace CarlMultiProject.Pages
 
         private void Populate_Date_Time()
         {
-            DateTime now = DateTime.Now;
+            DateTime now = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central European Standard Time");
             TextBox_StartDate.Text = now.ToString("yyyy-MM-dd");
             TextBox_EndDate.Text = now.ToString("yyyy-MM-dd");
             TextBox_StartTime.Text = now.ToString("hh:mm");
@@ -276,13 +276,16 @@ namespace CarlMultiProject.Pages
 
         protected void Button_SetStartTime_Click(object sender, EventArgs e)
         {
-            DateTime now = DateTime.Now;
+            DateTime now = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central European Standard Time");
             TextBox_StartTime.Text = now.ToString("hh:mm");
         }
         protected void Button_SetEndTime_Click(object sender, EventArgs e)
         {
-            DateTime now = DateTime.Now;
+            DateTime now = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central European Standard Time");
+
+
             TextBox_EndTime.Text = now.ToString("hh:mm");
+
         }
     }
 }
