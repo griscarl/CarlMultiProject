@@ -16,7 +16,11 @@ namespace CarlLaptopProject.Pages
         string strCon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-            Populate_Boat_Dropdown();
+            if (!IsPostBack)
+            {
+
+                Populate_Boat_Dropdown();
+            }
         }
 
         private void Populate_Boat_Dropdown()
