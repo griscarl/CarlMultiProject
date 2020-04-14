@@ -105,6 +105,24 @@ namespace CarlMultiProject.Pages
         protected global::System.Web.UI.WebControls.TextBox TextBox_FuelIntake;
 
         /// <summary>
+        /// TextBox_Tacho control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_Tacho;
+
+        /// <summary>
+        /// TextBox_OilIntake control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_OilIntake;
+
+        /// <summary>
         /// TextBox_FromLocation control.
         /// </summary>
         /// <remarks>
