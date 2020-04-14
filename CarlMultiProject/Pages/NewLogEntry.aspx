@@ -77,9 +77,12 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <asp:Label Text="Fuel Intake" runat="server" />
+                                <asp:Label Text="Full Tank - Fuel Intake" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <asp:CheckBox class="form-control" ID="CheckBox_FullTank" runat="server" />
+                                        </div>
                                         <asp:TextBox CssClass="form-control" ID="TextBox_FuelIntake" runat="server" Text="0" TextMode="Number"></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">l</span>

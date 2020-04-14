@@ -87,6 +87,15 @@ namespace CarlMultiProject.Pages
         protected global::System.Web.UI.WebControls.TextBox TextBox_Distance;
 
         /// <summary>
+        /// CheckBox_FullTank control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox CheckBox_FullTank;
+
+        /// <summary>
         /// TextBox_FuelIntake control.
         /// </summary>
         /// <remarks>

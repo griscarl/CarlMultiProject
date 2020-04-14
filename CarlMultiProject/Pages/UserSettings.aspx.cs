@@ -16,6 +16,10 @@ namespace CarlLaptopProject.Pages
         string strCon = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["UserId"] == null)
+            {
+                Response.Redirect("homepage.aspx");
+            }
             if (!IsPostBack)
             {
 

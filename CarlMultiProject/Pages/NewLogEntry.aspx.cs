@@ -40,6 +40,52 @@ namespace CarlMultiProject.Pages
             }
         }
 
+        protected void Button_SaveLogEntry_Click(object sender, EventArgs e)
+        {
+            if (ViewState["LogEntryId"] == null)
+            {
+                Insert_Log_Entry(1);
+            }
+            else
+            {
+                //Response.Write("<script>alert('Exists ongoing! " + "LogEntryId: " + ViewState["LogEntryId"] + "');</script>");
+                Update_Log_Entry(1);
+            }
+        }
+
+        protected void Button_ConfirmLogEntry_Click(object sender, EventArgs e)
+        {
+            if(ViewState["LogEntryId"] == null)
+            {
+                if (Validate_Input()) 
+                {
+                    Insert_Log_Entry(0);
+                }
+            }
+            else
+            {
+                if (Validate_Input())
+                {
+                    Update_Log_Entry(0);
+                }
+            }
+        }
+
+        protected void Button_SetStartTime_Click(object sender, EventArgs e)
+        {
+            DateTime now = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central European Standard Time");
+            TextBox_StartTime.Text = now.ToString("hh:mm");
+        }
+        protected void Button_SetEndTime_Click(object sender, EventArgs e)
+        {
+            DateTime now = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central European Standard Time");
+
+
+            TextBox_EndTime.Text = now.ToString("hh:mm");
+
+        }
+
+        //User defined functions
         private bool Populate_Ongoing()
         {
             try
@@ -75,6 +121,12 @@ namespace CarlMultiProject.Pages
                     TextBox_FromLocation.Text = dr["FromLocation"].ToString();
                     TextBox_ToLocation.Text = dr["ToLocation"].ToString();
                     TextBox_Notes.Text = dr["Notes"].ToString();
+                    Response.Write("<script>alert('" + dr["FullTank"].ToString() + "');</script>");
+
+                    if (dr["FullTank"].ToString() == "True")
+                    {
+                        CheckBox_FullTank.Checked = true;
+                    }
                 }
                 con.Close();
             }
@@ -85,29 +137,68 @@ namespace CarlMultiProject.Pages
             }
             return true;
         }
-
-        private void Populate_Date_Time()
+        private void Insert_Log_Entry(int isOngoing)
         {
-            DateTime now = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central European Standard Time");
-            TextBox_StartDate.Text = now.ToString("yyyy-MM-dd");
-            TextBox_EndDate.Text = now.ToString("yyyy-MM-dd");
-            TextBox_StartTime.Text = now.ToString("hh:mm");
-            TextBox_EndTime.Text = now.ToString("hh:mm");
-        }
-
-        protected void Button_SaveLogEntry_Click(object sender, EventArgs e)
-        {
-            if (ViewState["LogEntryId"] == null)
+            string message = "'Entry inserted Successfully!'";
+            Page.DataBind();
+            try
             {
-                Insert_Log_Entry(1);
+                SqlConnection con = new SqlConnection(strCon);
+                if (con.State == System.Data.ConnectionState.Closed) //Make sure the connection is open.
+                {
+                    con.Open();
+                }
+
+                //Create the command (Is it possible to simply write a function name here?)
+                SqlCommand cmd = new SqlCommand("EXEC logbook.LogEntry_Insert " +
+                    "@BoatId = @bi, @DatetimeStart = @dts,@DatetimeEnd = @dte,@DistanceInNM = @dinm,@FuelIntakeInLiters = @fiil, @FullTank = @ft, @FromLocation = @fl,@ToLocation = @tl,@Notes = @n, @IsOngoing=@io",  con);
+
+                string sqlDateTimeStart = TextBox_StartDate.Text + " " + TextBox_StartTime.Text + ":00.000";
+                string sqlDateTimeEnd = TextBox_EndDate.Text + " " + TextBox_EndTime.Text + ":00.000";
+                //string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
+
+                //Define the variables in the SqlCommand
+                cmd.Parameters.AddWithValue("@bi", DropDown_Boat.SelectedValue);
+                cmd.Parameters.AddWithValue("@dts", sqlDateTimeStart);
+                cmd.Parameters.AddWithValue("@dte", sqlDateTimeEnd);
+                cmd.Parameters.AddWithValue("@dinm", TextBox_Distance.Text.Trim());
+                cmd.Parameters.AddWithValue("@fiil", TextBox_FuelIntake.Text.Trim());
+                cmd.Parameters.AddWithValue("@fl", TextBox_FromLocation.Text.Trim());
+                cmd.Parameters.AddWithValue("@tl", TextBox_ToLocation.Text.Trim());
+                cmd.Parameters.AddWithValue("@n", TextBox_Notes.Text.Trim());
+                cmd.Parameters.AddWithValue("@io", isOngoing);
+                if (CheckBox_FullTank.Checked == true)
+                {
+                    cmd.Parameters.AddWithValue("@ft", 1);
+                    message += " full tank";
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@ft", 0);
+                    message += " not full tank";
+                }
+                cmd.ExecuteNonQuery();
+                con.Close();
+
+                Response.Write("<script>alert(' " + message + "');</script>");
+
+                //Response.Redirect("UserProfile.aspx");
             }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+                throw;
+            }
+            if (isOngoing == 0) 
+            {
+                Response.Redirect("ViewLog.aspx");
+            } 
             else
             {
-                Response.Write("<script>alert('Exists ongoing! " + "LogEntryId: " + ViewState["LogEntryId"] + "');</script>");
-                Update_Log_Entry(1);
+                Response.Redirect("NewLogEntry.aspx");
             }
-        }
 
+        }
         private void Update_Log_Entry(int isOngoing)
         {
             try
@@ -120,7 +211,7 @@ namespace CarlMultiProject.Pages
 
                 //Create the command (Is it possible to simply write a function name here?)
                 SqlCommand cmd = new SqlCommand("EXEC logbook.LogEntry_Update " +
-                    "@LogEntryId = @lei, @BoatId = @bi, @DatetimeStart = @dts,@DatetimeEnd = @dte,@DistanceInNM = @dinm,@FuelIntakeInLiters = @fiil,@FromLocation = @fl,@ToLocation = @tl,@Notes = @n, @IsOngoing=@io", con);
+                    "@LogEntryId = @lei, @BoatId = @bi, @DatetimeStart = @dts,@DatetimeEnd = @dte,@DistanceInNM = @dinm,@FuelIntakeInLiters = @fiil, @FullTank = @ft ,@FromLocation = @fl,@ToLocation = @tl,@Notes = @n, @IsOngoing=@io", con);
 
                 string sqlDateTimeStart = TextBox_StartDate.Text + " " + TextBox_StartTime.Text + ":00.000";
                 string sqlDateTimeEnd = TextBox_EndDate.Text + " " + TextBox_EndTime.Text + ":00.000";
@@ -137,6 +228,16 @@ namespace CarlMultiProject.Pages
                 cmd.Parameters.AddWithValue("@tl", TextBox_ToLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@n", TextBox_Notes.Text.Trim());
                 cmd.Parameters.AddWithValue("@io", isOngoing);
+
+                if (CheckBox_FullTank.Checked == true)
+                {
+                    cmd.Parameters.AddWithValue("@ft", 1);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@ft", 0);
+
+                }
                 cmd.ExecuteNonQuery();
                 con.Close();
 
@@ -153,26 +254,10 @@ namespace CarlMultiProject.Pages
             {
                 Response.Redirect("ViewLog.aspx");
             }
-        }
-
-        protected void Button_ConfirmLogEntry_Click(object sender, EventArgs e)
-        {
-            if(ViewState["LogEntryId"] == null)
             {
-                if (Validate_Input()) 
-                {
-                    Insert_Log_Entry(0);
-                }
-            }
-            else
-            {
-                if (Validate_Input())
-                {
-                    Update_Log_Entry(0);
-                }
+                Response.Redirect("NewLogEntry.aspx");
             }
         }
-
         private bool Validate_Input()
         {
             if (TextBox_Distance.Text.Trim() != "" && TextBox_FuelIntake.Text.Trim() != "" && TextBox_FromLocation.Text.Trim() != "" && TextBox_ToLocation.Text.Trim() != "")
@@ -184,53 +269,6 @@ namespace CarlMultiProject.Pages
             {
                 Response.Write("<script>alert('Not Valid inputs');</script>");
                 return false;
-            }
-        }
-
-        private void Insert_Log_Entry(int isOngoing)
-        {
-            Page.DataBind();
-            try
-            {
-                SqlConnection con = new SqlConnection(strCon);
-                if (con.State == System.Data.ConnectionState.Closed) //Make sure the connection is open.
-                {
-                    con.Open();
-                }
-
-                //Create the command (Is it possible to simply write a function name here?)
-                SqlCommand cmd = new SqlCommand("EXEC logbook.LogEntry_Insert " +
-                    "@BoatId = @bi, @DatetimeStart = @dts,@DatetimeEnd = @dte,@DistanceInNM = @dinm,@FuelIntakeInLiters = @fiil,@FromLocation = @fl,@ToLocation = @tl,@Notes = @n, @IsOngoing=@io",  con);
-
-                string sqlDateTimeStart = TextBox_StartDate.Text + " " + TextBox_StartTime.Text + ":00.000";
-                string sqlDateTimeEnd = TextBox_EndDate.Text + " " + TextBox_EndTime.Text + ":00.000";
-                //string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
-
-                //Define the variables in the SqlCommand
-                cmd.Parameters.AddWithValue("@bi", DropDown_Boat.SelectedValue);
-                cmd.Parameters.AddWithValue("@dts", sqlDateTimeStart);
-                cmd.Parameters.AddWithValue("@dte", sqlDateTimeEnd);
-                cmd.Parameters.AddWithValue("@dinm", TextBox_Distance.Text.Trim());
-                cmd.Parameters.AddWithValue("@fiil", TextBox_FuelIntake.Text.Trim());
-                cmd.Parameters.AddWithValue("@fl", TextBox_FromLocation.Text.Trim());
-                cmd.Parameters.AddWithValue("@tl", TextBox_ToLocation.Text.Trim());
-                cmd.Parameters.AddWithValue("@n", TextBox_Notes.Text.Trim());
-                cmd.Parameters.AddWithValue("@io", isOngoing);
-                cmd.ExecuteNonQuery();
-                con.Close();
-
-                Response.Write("<script>alert('Entry inserted Successfully!');</script>");
-
-                //Response.Redirect("UserProfile.aspx");
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('" + ex.Message + "');</script>");
-                throw;
-            }
-            if (isOngoing == 0) 
-            {
-                Response.Redirect("ViewLog.aspx");
             }
         }
         private void Populate_Boat_Dropdown()
@@ -273,19 +311,14 @@ namespace CarlMultiProject.Pages
                 throw;
             }
         }
-
-        protected void Button_SetStartTime_Click(object sender, EventArgs e)
+        private void Populate_Date_Time()
         {
             DateTime now = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central European Standard Time");
+            TextBox_StartDate.Text = now.ToString("yyyy-MM-dd");
+            TextBox_EndDate.Text = now.ToString("yyyy-MM-dd");
             TextBox_StartTime.Text = now.ToString("hh:mm");
-        }
-        protected void Button_SetEndTime_Click(object sender, EventArgs e)
-        {
-            DateTime now = TimeZoneInfo.ConvertTimeBySystemTimeZoneId(DateTime.Now, "Central European Standard Time");
-
-
             TextBox_EndTime.Text = now.ToString("hh:mm");
-
         }
+
     }
 }
