@@ -4,9 +4,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 mx-auto">
+            <div class="col-lg-6 mx-auto">
                 <div class="card" >
                     <img src="../Images/Pikabook_wide.png" class="card-img-top" >
                     <div class="card-body">

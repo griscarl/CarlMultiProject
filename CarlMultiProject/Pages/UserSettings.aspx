@@ -3,9 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-10 mx-auto">
+            <div class="col-lg-10 mx-auto">
                 <div class="card">
                     <img  class="rounded mx-auto d-block img-fluid" src="../Images/settings.png" />
                     <h3>Settings!</h3>
