@@ -36,7 +36,7 @@ FROM
                                 <asp:BoundField DataField="DatetimeStart" HeaderText="Start time" SortExpression="DatetimeStart" >
                                 <ControlStyle Width="100px" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="LogEntryId" HeaderText="LogEntryId" SortExpression="DatetimeEnd" />
+                                <%--<asp:BoundField DataField="LogEntryId" HeaderText="LogEntryId" SortExpression="DatetimeEnd" />--%>
                                 <asp:BoundField DataField="DatetimeEnd" HeaderText="End time" SortExpression="DatetimeEnd" />
                                 <asp:BoundField DataField="DistanceInNM" HeaderText="Distance in NM" SortExpression="DistanceInNM" />
                                 <asp:BoundField DataField="FuelIntakeInLiters" HeaderText="Fuel intake in Liters" SortExpression="FuelIntakeInLiters" />

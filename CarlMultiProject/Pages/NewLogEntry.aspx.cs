@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -151,18 +152,20 @@ namespace CarlMultiProject.Pages
 
                 //Create the command (Is it possible to simply write a function name here?)
                 SqlCommand cmd = new SqlCommand("EXEC logbook.LogEntry_Insert " +
-                    "@BoatId = @bi, @DatetimeStart = @dts,@DatetimeEnd = @dte,@DistanceInNM = @dinm,@FuelIntakeInLiters = @fiil, @FullTank = @ft, @FromLocation = @fl,@ToLocation = @tl,@Notes = @n, @IsOngoing=@io",  con);
+                    "@BoatId = @bi, @DatetimeStart = @dts,@DatetimeEnd = @dte,@DistanceInNM = @dinm,@FuelIntakeInLiters = @fiil, @FullTank = @ft, @Tacho = @t, @OilIntake = @oi, @FromLocation = @fl,@ToLocation = @tl,@Notes = @n, @IsOngoing=@io",  con);
 
                 string sqlDateTimeStart = TextBox_StartDate.Text + " " + TextBox_StartTime.Text + ":00.000";
                 string sqlDateTimeEnd = TextBox_EndDate.Text + " " + TextBox_EndTime.Text + ":00.000";
                 //string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
-
+                
                 //Define the variables in the SqlCommand
                 cmd.Parameters.AddWithValue("@bi", DropDown_Boat.SelectedValue);
                 cmd.Parameters.AddWithValue("@dts", sqlDateTimeStart);
                 cmd.Parameters.AddWithValue("@dte", sqlDateTimeEnd);
-                cmd.Parameters.AddWithValue("@dinm", TextBox_Distance.Text.Trim());
-                cmd.Parameters.AddWithValue("@fiil", TextBox_FuelIntake.Text.Trim());
+                cmd.Parameters.AddWithValue("@dinm", Math.Round(Convert.ToDecimal(TextBox_Distance.Text), 2));
+                cmd.Parameters.AddWithValue("@fiil", Math.Round(Convert.ToDecimal(TextBox_FuelIntake.Text), 2));
+                cmd.Parameters.AddWithValue("@t", Math.Round(Convert.ToDecimal(TextBox_Tacho.Text), 2));
+                cmd.Parameters.AddWithValue("@oi", Math.Round(Convert.ToDecimal(TextBox_OilIntake.Text), 2));
                 cmd.Parameters.AddWithValue("@fl", TextBox_FromLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@tl", TextBox_ToLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@n", TextBox_Notes.Text.Trim());
@@ -222,8 +225,10 @@ namespace CarlMultiProject.Pages
                 cmd.Parameters.AddWithValue("@bi", DropDown_Boat.SelectedValue);
                 cmd.Parameters.AddWithValue("@dts", sqlDateTimeStart);
                 cmd.Parameters.AddWithValue("@dte", sqlDateTimeEnd);
-                cmd.Parameters.AddWithValue("@dinm", TextBox_Distance.Text.Trim());
-                cmd.Parameters.AddWithValue("@fiil", TextBox_FuelIntake.Text.Trim());
+                cmd.Parameters.AddWithValue("@dinm", Math.Round(Convert.ToDecimal(TextBox_Distance.Text), 2));
+                cmd.Parameters.AddWithValue("@fiil", Math.Round(Convert.ToDecimal(TextBox_FuelIntake.Text), 2));
+                cmd.Parameters.AddWithValue("@t", Math.Round(Convert.ToDecimal(TextBox_Tacho.Text), 2));
+                cmd.Parameters.AddWithValue("@oi", Math.Round(Convert.ToDecimal(TextBox_OilIntake.Text), 2));
                 cmd.Parameters.AddWithValue("@fl", TextBox_FromLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@tl", TextBox_ToLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@n", TextBox_Notes.Text.Trim());

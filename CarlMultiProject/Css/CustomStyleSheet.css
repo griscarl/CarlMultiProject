@@ -1,16 +1,33 @@
-﻿.footerlinks{
+﻿.footerlinks {
     color: #ffffff;
     text-decoration: none !important
 }
 
-.footerlinks:hover{
-    color: #ffd800
-}
+    .footerlinks:hover {
+        color: #ffd800
+    }
 
-#footer1{
+#footer1 {
     background: #762b00
 }
 
 #footer2 {
     background: #531f00
+}
+
+/*Try top turn off number togglers*/
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
 }

@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-lg-8 mx-auto">
                 <div class="card">
-                    <img src="../Images/logbook_big.jpg" width="100" class="card-img-top">
+                    <%--<img src="../Images/logbook_big.jpg" width="100" class="card-img-top">--%>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
@@ -69,7 +69,7 @@
                                 <asp:Label Text="Distance" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox CssClass="form-control" ID="TextBox_Distance" runat="server" Text="0" TextMode="Number"></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_Distance" runat="server" Text="0.0" TextMode="Number" Step="0.1"></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">NM</span>
                                         </div>
@@ -77,13 +77,13 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <asp:Label Text="Full Tank - Fuel Intake" runat="server" />
+                                <asp:Label Text="Fuel" runat="server" />
                                 <div class="form-group">
-                                    <div class="input-group">
+                                    <div class="input-group flex-nowrap">
                                         <div class="input-group-prepend">
-                                            <asp:CheckBox class="form-control" ID="CheckBox_FullTank" runat="server" />
+                                            <asp:CheckBox class="form-control" ID="CheckBox_FullTank" Text="Fulltank" runat="server" />
                                         </div>
-                                        <asp:TextBox CssClass="form-control" ID="TextBox_FuelIntake" runat="server" Text="0" TextMode="Number"></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control"  ID="TextBox_FuelIntake" runat="server" Text="0.0" TextMode="Number" Step="0.1" ></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">l</span>
                                         </div>
@@ -97,7 +97,7 @@
                                 <asp:Label Text="TACHO" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox CssClass="form-control" ID="TextBox_Tacho" runat="server" Text="0.0" TextMode="Number"></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_Tacho" runat="server" Text="0.0" TextMode="Number" Step="0.1"></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">h</span>
                                         </div>
@@ -108,7 +108,7 @@
                                 <asp:Label Text="Oil Intake" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox CssClass="form-control" ID="TextBox_OilIntake" runat="server" Text="0.0" TextMode="Number"></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_OilIntake" runat="server" Text="0.0" TextMode="Number" Step="0.1"></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">l</span>
                                         </div>
