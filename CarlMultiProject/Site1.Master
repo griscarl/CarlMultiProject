@@ -4,7 +4,10 @@
 
 <html>
 <head runat="server">
-    <title></title>
+    <title>Logbook Project</title>
+    <%--My Custom CSS--%>
+    <link href="Css/CustomStyleSheet.css" rel="stylesheet" />
+
     <%--Bootstrap CSS--%>
     <link href="Bootstrap/Css/sandstone_bootstrap.min.css" rel="stylesheet" />
     <%--DataTables.Net CSS--%>
@@ -12,8 +15,6 @@
     <%--FontAwesome CSS--%>
     <link href="fontawesome/css/all.css" rel="stylesheet" />
     
-    <%--My Custom CSS--%>
-    <link href="Css/CustomStyleSheet.css" rel="stylesheet" />
 
     <%--JQuery JS--%>
     <script src="../Bootstrap/Js/jquery-3.4.1.slim.min.js"></script>

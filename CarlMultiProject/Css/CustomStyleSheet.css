@@ -1,14 +1,20 @@
-﻿.card {
-    min-height: 80vh;
-}
-.footerlinks {
-    color: #ffffff;
-    text-decoration: none !important
+﻿h1, .h1 {
+    text-align: center;
 }
 
-    .footerlinks:hover {
-        color: #ffd800
-    }
+.card {
+    min-height: 80vh;
+}
+
+.footerlinks {
+    color: #ffffff;
+    text-decoration: none !important;
+
+}
+
+.footerlinks:hover {
+    color: #ffd800
+}
 
 #footer1 {
     background: #762b00
@@ -34,3 +40,4 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance: textfield;
 }
+/*Stop trying to turn off number togglers*/
