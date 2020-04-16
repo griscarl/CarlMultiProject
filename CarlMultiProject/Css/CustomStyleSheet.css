@@ -1,4 +1,7 @@
-﻿.footerlinks {
+﻿.card {
+    min-height: 80vh;
+}
+.footerlinks {
     color: #ffffff;
     text-decoration: none !important
 }

@@ -22,6 +22,8 @@
     <%--Bootstrap JS--%>
     <script src="../Bootstrap/Js/bootstrap.min.js"></script>
 
+    <%--something from Stackoverflow to help with mobile devices--%>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -85,7 +87,7 @@
 
         <!-- Main Content Placeholder -->
         <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" ></asp:ContentPlaceHolder>
         </div>
         <!-- Main Content Placeholder -->
 

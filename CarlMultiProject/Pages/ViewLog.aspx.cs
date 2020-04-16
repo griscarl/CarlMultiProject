@@ -71,11 +71,10 @@ namespace CarlMultiProject.Pages
             FillGridView();
         }
 
-        protected void Linkbutton_EditLogEntry_Click(object sender, EventArgs e)
+        protected void Button_EditLogEntry_Click(object sender, EventArgs e)
         {
-            int logEntryId = Convert.ToInt32((sender as LinkButton).CommandArgument);
-
-            Response.Write("<script>alert('logEntryId: " + logEntryId + "');</script>");
+            int logEntryId = Convert.ToInt32((sender as Button).CommandArgument);
+            Response.Write("<script>alert('Edit is not implemented yet, logEntryId: " + logEntryId + "');</script>");
 
         }
         private void FillGridView()

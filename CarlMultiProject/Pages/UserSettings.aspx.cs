@@ -104,8 +104,8 @@ namespace CarlLaptopProject.Pages
                 cmd.Parameters.AddWithValue("@BoatModel", TextBox_BoatModel.Text.Trim());
                 cmd.Parameters.AddWithValue("@InsuranceNumber", TextBox_InsuranceNumber.Text.Trim());
                 cmd.Parameters.AddWithValue("@RadioCallSign", TextBox_RadioCallSign.Text.Trim());
-                cmd.Parameters.AddWithValue("@Length", TextBox_Length.Text.Trim());
-                cmd.Parameters.AddWithValue("@Width", TextBox_Width.Text.Trim());
+                cmd.Parameters.AddWithValue("@Length", Math.Round(Convert.ToDecimal(TextBox_Length.Text),2));
+                cmd.Parameters.AddWithValue("@Width", Math.Round(Convert.ToDecimal(TextBox_Width.Text),2));
                 cmd.Parameters.AddWithValue("@Weight", TextBox_Weight.Text.Trim());			
                 cmd.Parameters.AddWithValue("@MastHeight", TextBox_MastHeight.Text.Trim());
                 cmd.Parameters.AddWithValue("@FuelCapacity", TextBox_FuelCapacity.Text.Trim());
@@ -113,6 +113,8 @@ namespace CarlLaptopProject.Pages
                 cmd.Parameters.AddWithValue("@ServiceInterval", TextBox_ServiceInterval.Text.Trim());
                 cmd.Parameters.AddWithValue("@IsActive", 1);
                 cmd.ExecuteNonQuery();
+
+                //cmd.Parameters.AddWithValue("@Width", Math.Round(Convert.ToDecimal(TextBox_OilIntake.Text), 2));
 
                 con.Close();
                 BoatDetails.Visible = false;

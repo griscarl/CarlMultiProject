@@ -102,7 +102,7 @@
                                     <div class="form-group">
                                         <label>Length</label>
                                         <div class="input-group flex-nowrap">
-                                            <asp:TextBox class="form-control" ID="TextBox_Length" runat="server" placeholder="Length" TextMode="Number"></asp:TextBox>
+                                            <asp:TextBox class="form-control" ID="TextBox_Length" runat="server" placeholder="0.00" Step="0.01" TextMode="Number"></asp:TextBox>
                                             <div class="input-group-append">
                                                 <span class="input-group-text form-control" id="basic-addon3">m</span>
                                             </div>
@@ -113,7 +113,7 @@
                                     <div class="form-group">
                                         <label>Width</label>
                                         <div class="input-group flex-nowrap">
-                                            <asp:TextBox class="form-control" ID="TextBox_Width" runat="server" placeholder="Width" TextMode="Number"></asp:TextBox>
+                                            <asp:TextBox class="form-control" ID="TextBox_Width" runat="server" placeholder="0.00" Step="0.01" TextMode="Number"></asp:TextBox>
                                             <div class="input-group-append">
                                                 <span class="input-group-text form-control" id="basic-addon4">m</span>
                                             </div>
