@@ -17,7 +17,7 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <div class="form-group">
                                     <label>Name</label>
                                     <div class="input-group">
@@ -26,21 +26,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <div class="form-group">
                                     <label>Moron Level</label>
                                     <asp:TextBox class="form-control" ID="TextBox_MoronLevel" Text="10" TextMode="Number" ReadOnly="true" runat="server"></asp:TextBox>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <div class="form-group">
                                     <label>Email</label>
                                     <asp:TextBox class="form-control" ID="TextBox_Email" runat="server" placeholder="abc@def.com" TextMode="Email"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <div class="form-group">
                                     <label>Favoritpizza</label>
                                     <asp:TextBox class="form-control" ID="TextBox_Pizza" Text="Kebabpizza" ReadOnly="true" runat="server"></asp:TextBox>

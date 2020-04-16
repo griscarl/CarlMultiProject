@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EncryptionandDecryption;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+
 
 namespace CarlLaptopProject.Pages
 {
@@ -27,7 +29,6 @@ namespace CarlLaptopProject.Pages
             }
 
         }
-
 
         protected void btn_BoatDropdownClick(object sender, EventArgs e)
         {
@@ -82,13 +83,97 @@ namespace CarlLaptopProject.Pages
                 }
             }
         }
-        
+
         protected void Button_UpdatePassword_Click(object sender, EventArgs e)
         {
-            string message = $"Old Password {TextBox_OldPassword.Text} New Password {Textbox_NewPassword.Text}";
-            Response.Write("<script>alert('"+message+"');</script>");
-
+            if (ValidPassword())
+            {
+                Response.Write($"<script>alert('Valid password');</script>");
+                UpdatePassword();
+            } else
+            { 
+                Response.Write($"<script>alert('Invalid password');</script>");
+                //string message = $"Old Password {TextBox_OldPassword.Text} New Password {Textbox_NewPassword.Text}";
+                //string encryptedPassword = Cryptography.Encrypt(Textbox_NewPassword.Text);
+                //Response.Write($"<script>alert('{message} encrypted password: {encryptedPassword}');</script>");
+            }
         }
+
+        private void UpdatePassword()
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(strCon);
+                if (con.State == System.Data.ConnectionState.Closed) //Make sure the connection is open.
+                {
+                    con.Open();
+                }
+
+                //Create the command (Is it possible to simply write a function name here?)
+                SqlCommand cmd = new SqlCommand("EXEC uspUpdateUserPassword @UserId, @PasswordEncrypted", con);
+
+                //Define the variables in the SqlCommand
+                cmd.Parameters.AddWithValue("@UserId", Session["UserId"]);
+                cmd.Parameters.AddWithValue("@PasswordEncrypted", Cryptography.Encrypt(Textbox_NewPassword.Text));
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+                Response.Write("<script>alert('Password Updated Successfully');</script>");
+
+                Populate_User_Settings();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+                throw;
+            }
+        }
+
+        private bool ValidPassword()
+        {
+            string passwordEncrypted = "";
+            try
+            {
+                SqlConnection con = new SqlConnection(strCon);
+                if (con.State == System.Data.ConnectionState.Closed) //Make sure the connection is open.
+                {
+                    con.Open();
+                }
+
+                //Create the command (Is it possible to simply write a function name here?)
+                SqlCommand cmd = new SqlCommand("EXEC uspGetUser @UserId ", con);
+
+                //Define the variables in the SqlCommand
+                cmd.Parameters.AddWithValue("@UserId", Session["UserId"]);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count < 1)
+                {
+                    Response.Write("<script>alert('No User found');</script>");
+
+                }
+                else
+                {
+                    passwordEncrypted = dt.Rows[0]["PasswordEncrypted"].ToString();
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+                throw;
+            }
+            if (passwordEncrypted == Cryptography.Encrypt(TextBox_OldPassword.Text))
+            {
+                return true;
+            } 
+            else
+            {
+                return false;
+            } 
+        }
+
         protected void Button_SaveBoat_Click(object sender, EventArgs e)
         {
             try
@@ -131,8 +216,6 @@ namespace CarlLaptopProject.Pages
                 throw;
             }
         }
-
-        //TODO: Implement Button_SaveUserSettings_Click
 
         private void Populate_Boat_Dropdown()
         {

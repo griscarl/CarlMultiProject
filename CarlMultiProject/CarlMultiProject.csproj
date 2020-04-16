@@ -1735,6 +1735,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cryptography.cs" />
     <Compile Include="Pages\Emergency.aspx.cs">
       <DependentUpon>Emergency.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

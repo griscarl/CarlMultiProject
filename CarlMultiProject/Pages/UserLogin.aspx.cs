@@ -1,6 +1,8 @@
-﻿using System;
+﻿using EncryptionandDecryption;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -29,7 +31,20 @@ namespace ELibraryManagement
         }
         protected void Button_Login_Click(object sender, EventArgs e)
         {
+            if (ValidPassword())
+            {
+                somefunction();
+            } 
+            else
+            {
+                Response.Write("<script>alert('Invalid Credentials');</script>");
+            }
+            
+        }
 
+        private bool ValidPassword()
+        {
+            string passwordEncrypted = "";
             try
             {
                 SqlConnection con = new SqlConnection(strCon);
@@ -37,9 +52,52 @@ namespace ELibraryManagement
                 {
                     con.Open();
                 }
-                SqlCommand cmd = new SqlCommand("EXEC uspLoginUser @Username, @Password", con);
-                cmd.Parameters.AddWithValue("@Username", TextBox_Username.Text.Trim());
-                cmd.Parameters.AddWithValue("@Password", TextBox_Password.Text.Trim());
+
+                //Create the command (Is it possible to simply write a function name here?)
+                SqlCommand cmd = new SqlCommand("EXEC uspGetUser @Username = @un ", con);
+
+                //Define the variables in the SqlCommand
+                cmd.Parameters.AddWithValue("@un", TextBox_Username.Text);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count < 1)
+                {
+                    Response.Write("<script>alert('No User found');</script>");
+
+                }
+                else
+                {
+                    passwordEncrypted = dt.Rows[0]["PasswordEncrypted"].ToString();
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+                throw;
+            }
+
+            if (passwordEncrypted == Cryptography.Encrypt(TextBox_Password.Text))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void somefunction()
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(strCon);
+                if (con.State == System.Data.ConnectionState.Closed) //Make sure the connection is open.
+                {
+                    con.Open();
+                }
+                SqlCommand cmd = new SqlCommand("EXEC uspGetUser @Username = @un", con);
+                cmd.Parameters.AddWithValue("@un", TextBox_Username.Text.Trim());
 
                 SqlDataReader dr = cmd.ExecuteReader();
 
