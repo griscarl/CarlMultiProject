@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-lg-10 mx-auto">
                 <div class="card">
-                    <img  class="rounded mx-auto d-block img-fluid" src="../Images/settings.png" />
+                    <img class="rounded mx-auto d-block img-fluid" src="../Images/settings2.png" />
                     <h3>Settings!</h3>
                     <div class="row">
                         <div class="col">
@@ -20,13 +20,16 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Name</label>
-                                    <asp:TextBox class="form-control" ID="TextBox_Name" runat="server" placeholder="Christian Moronsson"></asp:TextBox>
+                                    <div class="input-group">
+                                        <asp:TextBox class="form-control" ID="TextBox_FirstName" runat="server" placeholder="Christian"></asp:TextBox>
+                                        <asp:TextBox class="form-control" ID="TextBox_LastName" runat="server" placeholder="Moronsson"></asp:TextBox>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Moron Level</label>
-                                    <asp:TextBox class="form-control" ID="TextBox_MoroLevel" Text="10" TextMode="Number" runat="server"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="TextBox_MoronLevel" Text="10" TextMode="Number" ReadOnly="true" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -40,13 +43,13 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Favoritpizza</label>
-                                    <asp:TextBox class="form-control" ID="TextBox_Pizza" Text="Kebabpizza" runat="server"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="TextBox_Pizza" Text="Kebabpizza" ReadOnly="true" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <asp:Button ID="Button_SaveUserSettings" CssClass="btn btn-primary" Text="Update User Settings" OnClick="Button_SaveUserSettings_Click" runat="server"/>
+                            <div class="col-md-6 col-xl-3">
+                                <asp:Button ID="Button_SaveUserSettings" CssClass="btn btn-primary btn-block" Text="Update User Settings" OnClick="Button_SaveUserSettings_Click" runat="server" />
                             </div>
                         </div>
                         <div class="row">
@@ -54,7 +57,39 @@
                                 <hr />
                             </div>
                         </div>
-                        <div class="row"> 
+                        <div class="row">
+                            <div class="col-md-6 col-xl-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Old Password:</span>
+                                        </div>
+                                        <asp:TextBox ID="TextBox_OldPassword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend flex-nowrap">
+                                            <span class="input-group-text">New Password:</span>
+                                        </div>
+                                        <asp:TextBox ID="Textbox_NewPassword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-xl-3">
+                                <asp:Button ID="Button_UpdatePassword" CssClass="btn btn-primary btn-block" Text="Update Password" OnClick="Button_UpdatePassword_Click" runat="server" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr />
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col">
                                 <label>Default Boat</label>
                                 <div class="input-group mb-6">

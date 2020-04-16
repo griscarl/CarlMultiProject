@@ -22,50 +22,12 @@ namespace CarlLaptopProject.Pages
             }
             if (!IsPostBack)
             {
-
                 Populate_Boat_Dropdown();
+                Populate_User_Settings();
             }
+
         }
 
-        private void Populate_Boat_Dropdown()
-        {
-            try
-            {
-                SqlConnection con = new SqlConnection(strCon);
-                if (con.State == System.Data.ConnectionState.Closed) //Make sure the connection is open.
-                {
-                    con.Open();
-                }
-
-                //Create the command (Is it possible to simply write a function name here?)
-                SqlCommand cmd = new SqlCommand("EXEC uspGetBoats @UserId ", con);
-
-                //Define the variables in the SqlCommand
-                cmd.Parameters.AddWithValue("@UserId", Session["UserId"]);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                if (dt.Rows.Count < 1)
-                {
-                    DropDown_Boat.Items.Add(new ListItem("New Boat"));
-                    Response.Write("<script>alert('No boats found');</script>");
-
-                }
-                else
-                {
-                    DropDown_Boat.DataSource = dt;
-                    DropDown_Boat.DataValueField = "BoatName";
-                }
-
-                DropDown_Boat.DataBind();
-                con.Close();
-            }
-            catch (Exception ex)
-            {
-                Response.Write("<script>alert('" + ex.Message + "');</script>");
-                throw;
-            }
-        }
 
         protected void btn_BoatDropdownClick(object sender, EventArgs e)
         {
@@ -85,6 +47,48 @@ namespace CarlLaptopProject.Pages
             } 
         }
 
+        protected void Button_SaveUserSettings_Click(object sender, EventArgs e)
+        {
+
+            if(Valid_UserSettings())
+            {
+                try
+                {
+                    SqlConnection con = new SqlConnection(strCon);
+                    if (con.State == System.Data.ConnectionState.Closed) //Make sure the connection is open.
+                    {
+                        con.Open();
+                    }
+
+                    //Create the command (Is it possible to simply write a function name here?)
+                    SqlCommand cmd = new SqlCommand("EXEC uspUpdateUser @UserId, @FirstName, @LastName, @Email ", con);
+
+                    //Define the variables in the SqlCommand
+                    cmd.Parameters.AddWithValue("@UserId", Session["UserId"]);
+                    cmd.Parameters.AddWithValue("@FirstName", TextBox_FirstName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@LastName", TextBox_LastName.Text.Trim());
+                    cmd.Parameters.AddWithValue("@Email", TextBox_Email.Text.Trim());
+                    cmd.ExecuteNonQuery();
+
+                    con.Close();
+                    Response.Write("<script>alert('User Updated Successfully');</script>");
+                    
+                    Populate_User_Settings();
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('" + ex.Message + "');</script>");
+                    throw;
+                }
+            }
+        }
+        
+        protected void Button_UpdatePassword_Click(object sender, EventArgs e)
+        {
+            string message = $"Old Password {TextBox_OldPassword.Text} New Password {Textbox_NewPassword.Text}";
+            Response.Write("<script>alert('"+message+"');</script>");
+
+        }
         protected void Button_SaveBoat_Click(object sender, EventArgs e)
         {
             try
@@ -129,34 +133,99 @@ namespace CarlLaptopProject.Pages
         }
 
         //TODO: Implement Button_SaveUserSettings_Click
-        protected void Button_SaveUserSettings_Click(object sender, EventArgs e)
+
+        private void Populate_Boat_Dropdown()
         {
-            //try
-            //{
-            //    SqlConnection con = new SqlConnection(strCon);
-            //    if (con.State == System.Data.ConnectionState.Closed) //Make sure the connection is open.
-            //    {
-            //        con.Open();
-            //    }
+            try
+            {
+                SqlConnection con = new SqlConnection(strCon);
+                if (con.State == System.Data.ConnectionState.Closed) //Make sure the connection is open.
+                {
+                    con.Open();
+                }
 
-            //    //Create the command (Is it possible to simply write a function name here?)
-            //    SqlCommand cmd = new SqlCommand("EXEC uspUpdateUser @UserId, ", con);
+                //Create the command (Is it possible to simply write a function name here?)
+                SqlCommand cmd = new SqlCommand("EXEC uspGetBoats @UserId ", con);
 
-            //    //Define the variables in the SqlCommand
-            //    cmd.Parameters.AddWithValue("@UserId", Session["UserId"]);
-            //    cmd.ExecuteNonQuery();
+                //Define the variables in the SqlCommand
+                cmd.Parameters.AddWithValue("@UserId", Session["UserId"]);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count < 1)
+                {
+                    DropDown_Boat.Items.Add(new ListItem("New Boat"));
+                    Response.Write("<script>alert('No boats found');</script>");
 
-            //    con.Close();
-            //    Response.Write("<script>alert('UserUpdated');</script>");
-            //    Response.Redirect("UserSettings.aspx");
-            //}
-            //catch (Exception ex)
-            //{
-            //    Response.Write("<script>alert('" + ex.Message + "');</script>");
-            //    throw;
-            //}
+                }
+                else
+                {
+                    DropDown_Boat.DataSource = dt;
+                    DropDown_Boat.DataValueField = "BoatName";
+                }
 
-            Response.Write("<script>alert('Not Implemented yet');</script>");
+                DropDown_Boat.DataBind();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+                throw;
+            }
+        }
+
+        private void Populate_User_Settings()
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(strCon);
+                if (con.State == System.Data.ConnectionState.Closed) //Make sure the connection is open.
+                {
+                    con.Open();
+                }
+
+                //Create the command (Is it possible to simply write a function name here?)
+                SqlCommand cmd = new SqlCommand("EXEC uspGetUser @UserId ", con);
+
+                //Define the variables in the SqlCommand
+                cmd.Parameters.AddWithValue("@UserId", Session["UserId"]);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count < 1)
+                {
+                    Response.Write("<script>alert('No User found');</script>");
+
+                }
+                else
+                {
+                    TextBox_FirstName.Text = dt.Rows[0]["FirstName"].ToString();
+                    TextBox_LastName.Text = dt.Rows[0]["LastName"].ToString();
+                    TextBox_Email.Text = dt.Rows[0]["Email"].ToString();
+
+                }
+
+                DropDown_Boat.DataBind();
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+                throw;
+            }
+        }
+        private bool Valid_UserSettings()
+        {
+            //See if the UserSetting-inputs are valid
+            if (TextBox_FirstName.Text.Trim() != null && TextBox_LastName.Text.Trim() != null && TextBox_Email.Text.Trim() != null)
+            {
+                return true;
+            } 
+            else
+            {
+                Response.Write("<script>alert('Invalid User Settings. Empty values not allowed.');</script>");
+                return false;
+            }
         }
     }
 }

@@ -1723,6 +1723,7 @@
     <Content Include="Images\Sailboat_symbol.svg.png" />
     <Content Include="Images\satisfactory.jpg" />
     <Content Include="Images\settings.png" />
+    <Content Include="Images\settings2.png" />
     <Content Include="Images\Steffe.jpg" />
     <Content Include="Pages\Emergency.aspx" />
     <Content Include="Pages\homepage.aspx" />
