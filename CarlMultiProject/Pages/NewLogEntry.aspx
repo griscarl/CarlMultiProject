@@ -103,7 +103,7 @@
                                 <asp:Label Text="Distance" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox CssClass="form-control" ID="TextBox_Distance" runat="server" Text="0.0" TextMode="Number" Step="0.01"></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_Distance" runat="server" Placeholder="0.0" TextMode="Number" Step="0.01"></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">NM</span>
                                         </div>
@@ -117,7 +117,7 @@
                                         <div class="input-group-prepend">
                                             <asp:CheckBox class="form-control" ID="CheckBox_FullTank" Text="Fulltank" runat="server" />
                                         </div>
-                                        <asp:TextBox CssClass="form-control"  ID="TextBox_FuelIntake" runat="server" Text="0.0" TextMode="Number" Step="0.01" ></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control"  ID="TextBox_FuelIntake" runat="server" Placeholder="0.0" TextMode="Number" Step="0.01" ></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">l</span>
                                         </div>
@@ -128,7 +128,7 @@
                                 <asp:Label Text="TACHO" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox CssClass="form-control" ID="TextBox_Tacho" runat="server" Text="0.0" TextMode="Number" Step="0.01"></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_Tacho" runat="server" Placeholder="0.0" TextMode="Number" Step="0.01"></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">h</span>
                                         </div>
@@ -139,7 +139,7 @@
                                 <asp:Label Text="Oil Intake" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox CssClass="form-control" ID="TextBox_OilIntake" runat="server" Text="0.0" TextMode="Number" Step="0.01"></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_OilIntake" runat="server" Placeholder="0.0" TextMode="Number" Step="0.01"></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">l</span>
                                         </div>

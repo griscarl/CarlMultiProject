@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="col-md-6 col-lg-3">
                                     <div class="form-group">
-                                        <label>Mast Height</label>
+                                        <label>MAX Height</label>
                                         <div class="input-group flex-nowrap">
                                             <asp:TextBox class="form-control" ID="TextBox_MastHeight" runat="server" placeholder="Mast Height" TextMode="Number"></asp:TextBox>
                                             <div class="input-group-append">
