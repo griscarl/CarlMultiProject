@@ -117,12 +117,15 @@ namespace CarlMultiProject.Pages
                     TextBox_StartTime.Text = dr["DatetimeStart"].ToString().Substring(11, 5);
                     TextBox_EndDate.Text = dr["DatetimeEnd"].ToString().Substring(0, 10); ;
                     TextBox_EndTime.Text = dr["DatetimeEnd"].ToString().Substring(11, 5);
-                    TextBox_Distance.Text = dr["DistanceInNM"].ToString();
-                    TextBox_FuelIntake.Text = dr["FuelIntakeInLiters"].ToString();
+                    TextBox_Distance.Text = dr["DistanceInNM"].ToString().Replace(',','.');
+                    TextBox_FuelIntake.Text = dr["FuelIntakeInLiters"].ToString().Replace(',', '.');
+                    TextBox_Distance.Text = dr["DistanceInNM"].ToString().Replace(',', '.');
+                    TextBox_FuelIntake.Text = dr["FuelIntakeInLiters"].ToString().Replace(',', '.');
                     TextBox_FromLocation.Text = dr["FromLocation"].ToString();
                     TextBox_ToLocation.Text = dr["ToLocation"].ToString();
                     TextBox_Notes.Text = dr["Notes"].ToString();
-                    Response.Write("<script>alert('" + dr["FullTank"].ToString() + "');</script>");
+                    //Response.Write("<script>alert('+" + dr["FullTank"].ToString() + "');</script>");
+                    Console.WriteLine($"Distance: {dr["DistanceInNM"].ToString()} Fuelintake: {dr["FuelIntakeInLiters"].ToString()} OilIntake: {dr["OilIntake"].ToString()} Tacho: {dr["Tacho"].ToString()}");
 
                     if (dr["FullTank"].ToString() == "True")
                     {
@@ -157,15 +160,17 @@ namespace CarlMultiProject.Pages
                 string sqlDateTimeStart = TextBox_StartDate.Text + " " + TextBox_StartTime.Text + ":00.000";
                 string sqlDateTimeEnd = TextBox_EndDate.Text + " " + TextBox_EndTime.Text + ":00.000";
                 //string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
-                
+
+                System.Globalization.CultureInfo usCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+
                 //Define the variables in the SqlCommand
                 cmd.Parameters.AddWithValue("@bi", DropDown_Boat.SelectedValue);
                 cmd.Parameters.AddWithValue("@dts", sqlDateTimeStart);
                 cmd.Parameters.AddWithValue("@dte", sqlDateTimeEnd);
-                cmd.Parameters.AddWithValue("@dinm", Math.Round(Convert.ToDecimal(TextBox_Distance.Text), 2));
-                cmd.Parameters.AddWithValue("@fiil", Math.Round(Convert.ToDecimal(TextBox_FuelIntake.Text), 2));
-                cmd.Parameters.AddWithValue("@t", Math.Round(Convert.ToDecimal(TextBox_Tacho.Text), 2));
-                cmd.Parameters.AddWithValue("@oi", Math.Round(Convert.ToDecimal(TextBox_OilIntake.Text), 2));
+                cmd.Parameters.AddWithValue("@dinm", Math.Round(Decimal.Parse(TextBox_Distance.Text, usCulture), 2));
+                cmd.Parameters.AddWithValue("@fiil", Math.Round(Decimal.Parse(TextBox_FuelIntake.Text, usCulture), 2));
+                cmd.Parameters.AddWithValue("@t", Math.Round(Decimal.Parse(TextBox_Tacho.Text, usCulture), 2));
+                cmd.Parameters.AddWithValue("@oi", Math.Round(Decimal.Parse(TextBox_OilIntake.Text, usCulture), 2));
                 cmd.Parameters.AddWithValue("@fl", TextBox_FromLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@tl", TextBox_ToLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@n", TextBox_Notes.Text.Trim());
@@ -220,15 +225,17 @@ namespace CarlMultiProject.Pages
                 string sqlDateTimeEnd = TextBox_EndDate.Text + " " + TextBox_EndTime.Text + ":00.000";
                 //string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
 
+                System.Globalization.CultureInfo usCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+
                 //Define the variables in the SqlCommand
                 cmd.Parameters.AddWithValue("lei", ViewState["LogEntryId"]);
                 cmd.Parameters.AddWithValue("@bi", DropDown_Boat.SelectedValue);
                 cmd.Parameters.AddWithValue("@dts", sqlDateTimeStart);
                 cmd.Parameters.AddWithValue("@dte", sqlDateTimeEnd);
-                cmd.Parameters.AddWithValue("@dinm", Math.Round(Convert.ToDecimal(TextBox_Distance.Text), 2));
-                cmd.Parameters.AddWithValue("@fiil", Math.Round(Convert.ToDecimal(TextBox_FuelIntake.Text), 2));
-                cmd.Parameters.AddWithValue("@t", Math.Round(Convert.ToDecimal(TextBox_Tacho.Text), 2));
-                cmd.Parameters.AddWithValue("@oi", Math.Round(Convert.ToDecimal(TextBox_OilIntake.Text), 2));
+                cmd.Parameters.AddWithValue("@dinm", Math.Round(Decimal.Parse(TextBox_Distance.Text, usCulture), 2));
+                cmd.Parameters.AddWithValue("@fiil", Math.Round(Decimal.Parse(TextBox_FuelIntake.Text, usCulture), 2));
+                cmd.Parameters.AddWithValue("@t", Math.Round(Decimal.Parse(TextBox_Tacho.Text, usCulture), 2));
+                cmd.Parameters.AddWithValue("@oi", Math.Round(Decimal.Parse(TextBox_OilIntake.Text, usCulture), 2));
                 cmd.Parameters.AddWithValue("@fl", TextBox_FromLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@tl", TextBox_ToLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@n", TextBox_Notes.Text.Trim());

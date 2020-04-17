@@ -186,15 +186,15 @@ namespace CarlLaptopProject.Pages
 
                 //Create the command (Is it possible to simply write a function name here?)
                 SqlCommand cmd = new SqlCommand("EXEC uspInsertBoat @UserId, @BoatName, @BoatModel, @InsuranceNumber, @RadioCallSign, @Length, @Width, @Weight, @MastHeight, @FuelCapacity, @FuelBurn, @ServiceInterval, @IsActive", con);
-
+                System.Globalization.CultureInfo usCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
                 //Define the variables in the SqlCommand
                 cmd.Parameters.AddWithValue("@UserId", Session["UserId"]);
                 cmd.Parameters.AddWithValue("@BoatName", TextBox_BoatName.Text.Trim());			
                 cmd.Parameters.AddWithValue("@BoatModel", TextBox_BoatModel.Text.Trim());
                 cmd.Parameters.AddWithValue("@InsuranceNumber", TextBox_InsuranceNumber.Text.Trim());
                 cmd.Parameters.AddWithValue("@RadioCallSign", TextBox_RadioCallSign.Text.Trim());
-                cmd.Parameters.AddWithValue("@Length", Math.Round(Convert.ToDecimal(TextBox_Length.Text),2));
-                cmd.Parameters.AddWithValue("@Width", Math.Round(Convert.ToDecimal(TextBox_Width.Text),2));
+                cmd.Parameters.AddWithValue("@Length", Math.Round(Decimal.Parse(TextBox_Length.Text, usCulture),2));
+                cmd.Parameters.AddWithValue("@Width", Math.Round(Decimal.Parse(TextBox_Width.Text, usCulture), 2));
                 cmd.Parameters.AddWithValue("@Weight", TextBox_Weight.Text.Trim());			
                 cmd.Parameters.AddWithValue("@MastHeight", TextBox_MastHeight.Text.Trim());
                 cmd.Parameters.AddWithValue("@FuelCapacity", TextBox_FuelCapacity.Text.Trim());
