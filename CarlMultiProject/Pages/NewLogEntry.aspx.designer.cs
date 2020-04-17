@@ -24,6 +24,33 @@ namespace CarlMultiProject.Pages
         protected global::System.Web.UI.WebControls.DropDownList DropDown_Boat;
 
         /// <summary>
+        /// TextBox_RemainingFuel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_RemainingFuel;
+
+        /// <summary>
+        /// TextBox_RemainingTacho control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_RemainingTacho;
+
+        /// <summary>
+        /// TextBox_EngineService control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_EngineService;
+
+        /// <summary>
         /// TextBox_StartDate control.
         /// </summary>
         /// <remarks>
@@ -166,5 +193,14 @@ namespace CarlMultiProject.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_ConfirmLogEntry;
+
+        /// <summary>
+        /// Textbox_Debug control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Textbox_Debug;
     }
 }

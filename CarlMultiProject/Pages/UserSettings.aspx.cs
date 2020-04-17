@@ -45,6 +45,7 @@ namespace CarlLaptopProject.Pages
             { 
                 DropDown_Boat.Items.Remove("New Boat");
                 BoatDetails.Visible = false;
+                UpdateActiveBoat();
             } 
         }
 
@@ -244,7 +245,8 @@ namespace CarlLaptopProject.Pages
                 else
                 {
                     DropDown_Boat.DataSource = dt;
-                    DropDown_Boat.DataValueField = "BoatName";
+                    DropDown_Boat.DataValueField = "BoatId";
+                    DropDown_Boat.DataTextField = "BoatName";
                 }
 
                 DropDown_Boat.DataBind();
@@ -308,6 +310,33 @@ namespace CarlLaptopProject.Pages
             {
                 Response.Write("<script>alert('Invalid User Settings. Empty values not allowed.');</script>");
                 return false;
+            }
+        }
+
+        private void UpdateActiveBoat()
+        {
+            try
+            {
+                SqlConnection con = new SqlConnection(strCon);
+                if (con.State == System.Data.ConnectionState.Closed) //Make sure the connection is open.
+                {
+                    con.Open();
+                }
+
+                //Create the command (Is it possible to simply write a function name here?)
+                SqlCommand cmd = new SqlCommand("EXEC uspSetActiveBoat @BoatId", con);
+                
+                //Define the variables in the SqlCommand
+                cmd.Parameters.AddWithValue("@BoatId", DropDown_Boat.SelectedValue);
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+                Response.Redirect("UserSettings.aspx");
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+                throw;
             }
         }
     }

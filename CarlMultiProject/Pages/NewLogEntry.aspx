@@ -21,6 +21,42 @@
                                 </asp:DropDownList>
                             </div>
                         </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 col-xl-3">
+                                <asp:Label Text="Estimated Remaining Fuel" runat="server" />
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_RemainingFuel" Readonly="true" runat="server"></asp:TextBox>
+                                        <div class="input-group-append">
+                                                <span class="input-group-text">l</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-3">
+                                <asp:Label Text="Estimated Remaining Tacho" runat="server" />
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_RemainingTacho" Readonly="true" runat="server"></asp:TextBox>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">h</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-3">
+                                <asp:Label Text="Hours to Engine Service" runat="server" />
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_EngineService" ReadOnly="true" runat="server"></asp:TextBox>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">h</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col">
                                 <hr />
@@ -147,6 +183,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:Label Text="Debug-window" runat="server" />
+                                <div class="form-group">
+                                    <asp:TextBox ID="Textbox_Debug" Cssclass="form-control" TextMode="MultiLine" Rows="10" runat="server" ></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
                         <%--<a href="https://www.youtube.com/watch?v=oHg5SJYRHA0" class="btn btn-primary">Login</a>--%>
                     </div>
                 </div>
