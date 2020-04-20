@@ -53,7 +53,7 @@ namespace ELibraryManagement
                         Session["Username"] = dr["Username"];
                         Session["IsAdmin"] = dr["IsAdmin"];
                         Response.Write("<script>alert('Welcome " + dr["Username"] + " ID = " + dr["UserId"] + "IsAdmin = " + dr["IsAdmin"] + "');</script>");
-                        Response.Redirect("UserSettings.aspx");
+                        Response.Redirect("homepage.aspx");
 
                     }
 
