@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <div class="col-12">
                                 <Label>Username</Label> 
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="TextBox_Username" runat="server" placeholder="Username"></asp:TextBox>
@@ -34,7 +34,7 @@
                                     <asp:Button class="btn btn-success btn-block btn-lg" ID="Button_Login" runat="server" Text="Login" OnClick="Button_Login_Click" />
                                 </div>
                                 <div class="form-group">
-                                    <a href="UserSignup.aspx"><input class="btn btn-primary btn-block" id="Button_Signup" type="button" OnClick="Button_Signup_Click" value="Sign Up" /></a>
+                                    <input class="btn btn-primary btn-block" id="Button_Signup" type="button" OnClick="Button_Signup_Click" value="Sign Up" /></a>
                                 </div>
                                 <div class="form-group">
                                     <input class="btn btn-outline-warning btn-sm" id="Button_ForgotPassword" type="button" OnClick="Button_ForgotPassword_Click" value="Forgot Password" />

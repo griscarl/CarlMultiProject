@@ -7,8 +7,8 @@
         <div class="row">
             <div class="col-lg-10 mx-auto">
                 <div class="card">
-                    <img  class="rounded mx-auto d-block img-fluid" src="../Images/settings.png" />
-                    <h3>Settings!</h3>
+                    <img class="rounded mx-auto d-block img-fluid" src="../Images/settings2.png" />
+                    <h3 style="text-align: center">Settings</h3>
                     <div class="row">
                         <div class="col">
                             <hr />
@@ -17,36 +17,37 @@
 
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <div class="form-group">
                                     <label>Name</label>
-                                    <asp:TextBox class="form-control" ID="TextBox_Name" runat="server" placeholder="Christian Moronsson"></asp:TextBox>
+                                    <div class="input-group">
+                                        <asp:TextBox class="form-control" ID="TextBox_FirstName" runat="server" placeholder="Christian"></asp:TextBox>
+                                        <asp:TextBox class="form-control" ID="TextBox_LastName" runat="server" placeholder="Moronsson"></asp:TextBox>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <div class="form-group">
                                     <label>Moron Level</label>
-                                    <asp:TextBox class="form-control" ID="TextBox_MoroLevel" Text="10" TextMode="Number" runat="server"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="TextBox_MoronLevel" Text="10" TextMode="Number" ReadOnly="true" runat="server"></asp:TextBox>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <div class="form-group">
                                     <label>Email</label>
                                     <asp:TextBox class="form-control" ID="TextBox_Email" runat="server" placeholder="abc@def.com" TextMode="Email"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <div class="form-group">
                                     <label>Favoritpizza</label>
-                                    <asp:TextBox class="form-control" ID="TextBox_Pizza" Text="Kebabpizza" runat="server"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="TextBox_Pizza" Text="Kebabpizza" ReadOnly="true" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
-                                <asp:Button ID="Button_SaveUserSettings" CssClass="btn btn-primary" Text="Update User Settings" OnClick="Button_SaveUserSettings_Click" runat="server"/>
+                            <div class="col-md-6 col-xl-3">
+                                <asp:Button ID="Button_SaveUserSettings" CssClass="btn btn-primary btn-block" Text="Update User Settings" OnClick="Button_SaveUserSettings_Click" runat="server" />
                             </div>
                         </div>
                         <div class="row">
@@ -54,7 +55,39 @@
                                 <hr />
                             </div>
                         </div>
-                        <div class="row"> 
+                        <div class="row">
+                            <div class="col-md-6 col-xl-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Old Password:</span>
+                                        </div>
+                                        <asp:TextBox ID="TextBox_OldPassword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend flex-nowrap">
+                                            <span class="input-group-text">New Password:</span>
+                                        </div>
+                                        <asp:TextBox ID="Textbox_NewPassword" class="form-control" TextMode="Password" runat="server"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-xl-3">
+                                <asp:Button ID="Button_UpdatePassword" CssClass="btn btn-primary btn-block" Text="Update Password" OnClick="Button_UpdatePassword_Click" runat="server" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <hr />
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col">
                                 <label>Default Boat</label>
                                 <div class="input-group mb-6">
@@ -102,7 +135,7 @@
                                     <div class="form-group">
                                         <label>Length</label>
                                         <div class="input-group flex-nowrap">
-                                            <asp:TextBox class="form-control" ID="TextBox_Length" runat="server" placeholder="Length" TextMode="Number"></asp:TextBox>
+                                            <asp:TextBox class="form-control" ID="TextBox_Length" runat="server" placeholder="0.00" Step="0.01" TextMode="Number"></asp:TextBox>
                                             <div class="input-group-append">
                                                 <span class="input-group-text form-control" id="basic-addon3">m</span>
                                             </div>
@@ -113,7 +146,7 @@
                                     <div class="form-group">
                                         <label>Width</label>
                                         <div class="input-group flex-nowrap">
-                                            <asp:TextBox class="form-control" ID="TextBox_Width" runat="server" placeholder="Width" TextMode="Number"></asp:TextBox>
+                                            <asp:TextBox class="form-control" ID="TextBox_Width" runat="server" placeholder="0.00" Step="0.01" TextMode="Number"></asp:TextBox>
                                             <div class="input-group-append">
                                                 <span class="input-group-text form-control" id="basic-addon4">m</span>
                                             </div>
@@ -133,7 +166,7 @@
                                 </div>
                                 <div class="col-md-6 col-lg-3">
                                     <div class="form-group">
-                                        <label>Mast Height</label>
+                                        <label>MAX Height</label>
                                         <div class="input-group flex-nowrap">
                                             <asp:TextBox class="form-control" ID="TextBox_MastHeight" runat="server" placeholder="Mast Height" TextMode="Number"></asp:TextBox>
                                             <div class="input-group-append">

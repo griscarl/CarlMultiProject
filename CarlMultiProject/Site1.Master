@@ -4,7 +4,10 @@
 
 <html>
 <head runat="server">
-    <title></title>
+    <title>Logbook Project</title>
+    <%--My Custom CSS--%>
+    <link href="Css/CustomStyleSheet.css" rel="stylesheet" />
+
     <%--Bootstrap CSS--%>
     <link href="Bootstrap/Css/sandstone_bootstrap.min.css" rel="stylesheet" />
     <%--DataTables.Net CSS--%>
@@ -12,8 +15,6 @@
     <%--FontAwesome CSS--%>
     <link href="fontawesome/css/all.css" rel="stylesheet" />
     
-    <%--My Custom CSS--%>
-    <link href="Css/CustomStyleSheet.css" rel="stylesheet" />
 
     <%--JQuery JS--%>
     <script src="../Bootstrap/Js/jquery-3.4.1.slim.min.js"></script>
@@ -22,6 +23,8 @@
     <%--Bootstrap JS--%>
     <script src="../Bootstrap/Js/bootstrap.min.js"></script>
 
+    <%--something from Stackoverflow to help with mobile devices--%>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -42,9 +45,9 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="homepage.aspx">Home</a>
                         </li>
-                        <li class="nav-item active">
+                        <%--<li class="nav-item active">
                             <a class="nav-link" href="#">About</a>
-                        </li>
+                        </li>--%>
                         <%--<li class="nav-item active">
                             <a class="nav-link" href="#">Terms</a>
                         </li>--%>
@@ -79,13 +82,13 @@
             
             </nav>
         </div>
-        <div>
+        <%--<div>
             <asp:Label ID ="label_Username" CssClass="col-form-label-sm" runat="server"></asp:Label>
-        </div>
+        </div>--%>
 
         <!-- Main Content Placeholder -->
         <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" ></asp:ContentPlaceHolder>
         </div>
         <!-- Main Content Placeholder -->
 

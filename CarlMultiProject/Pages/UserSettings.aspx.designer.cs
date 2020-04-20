@@ -15,22 +15,31 @@ namespace CarlLaptopProject.Pages
     {
 
         /// <summary>
-        /// TextBox_Name control.
+        /// TextBox_FirstName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_Name;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_FirstName;
 
         /// <summary>
-        /// TextBox_MoroLevel control.
+        /// TextBox_LastName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox_MoroLevel;
+        protected global::System.Web.UI.WebControls.TextBox TextBox_LastName;
+
+        /// <summary>
+        /// TextBox_MoronLevel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_MoronLevel;
 
         /// <summary>
         /// TextBox_Email control.
@@ -58,6 +67,33 @@ namespace CarlLaptopProject.Pages
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button_SaveUserSettings;
+
+        /// <summary>
+        /// TextBox_OldPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TextBox_OldPassword;
+
+        /// <summary>
+        /// Textbox_NewPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Textbox_NewPassword;
+
+        /// <summary>
+        /// Button_UpdatePassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button_UpdatePassword;
 
         /// <summary>
         /// DropDown_Boat control.

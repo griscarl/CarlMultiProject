@@ -30,16 +30,24 @@ FROM
                             <Columns>
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="Linkbutton_EditLogEntry" Text="Edit" runat="server" CommandArgument='<%# Eval("LogEntryId")%>' OnClick="Linkbutton_EditLogEntry_Click"></asp:LinkButton>
+                                        <asp:Button ID="Button_EditLogEntry" CssClass="btn btn-primary" Text="Edit" runat="server" OnClick="Button_EditLogEntry_Click" CommandArgument='<%# Eval("LogEntryId")%>'/>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:BoundField DataField="DatetimeStart" HeaderText="Start time" SortExpression="DatetimeStart" >
+                                <asp:BoundField DataField="DatetimeStart" HeaderText="DEP" SortExpression="DatetimeStart" >
                                 <ControlStyle Width="100px" />
                                 </asp:BoundField>
                                 <%--<asp:BoundField DataField="LogEntryId" HeaderText="LogEntryId" SortExpression="DatetimeEnd" />--%>
-                                <asp:BoundField DataField="DatetimeEnd" HeaderText="End time" SortExpression="DatetimeEnd" />
+                                <asp:BoundField DataField="DatetimeEnd" HeaderText="ARR" SortExpression="DatetimeEnd" />
+                                <asp:BoundField DataField="TripTime" HeaderText="TripTime" SortExpression="TripTime" />
                                 <asp:BoundField DataField="DistanceInNM" HeaderText="Distance in NM" SortExpression="DistanceInNM" />
-                                <asp:BoundField DataField="FuelIntakeInLiters" HeaderText="Fuel intake in Liters" SortExpression="FuelIntakeInLiters" />
+                                <asp:BoundField DataField="AccumulatedDistance" HeaderText="Acc.Distance" SortExpression="AccumulatedDistance" />
+                                <asp:BoundField DataField="Tacho" HeaderText="TACHO" SortExpression="Tacho" />
+                                <asp:BoundField DataField="AccumulatedTacho" HeaderText="Acc.Tacho" SortExpression="AccumulatedTacho" />
+                                <asp:BoundField DataField="FullTank" HeaderText="Full Tank" SortExpression="FullTank" />
+                                <asp:BoundField DataField="FuelIntakeInLiters" HeaderText="Fuel" SortExpression="Fuel" />
+                                <asp:BoundField DataField="AccumulatedFuel" HeaderText="Acc.Fuel" SortExpression="AccumulatedFuel" />
+                                <asp:BoundField DataField="OilIntake" HeaderText="Oil" SortExpression="OilIntake" />
+                                <asp:BoundField DataField="AccumulatedOil" HeaderText="Acc.Oil" SortExpression="AccumulatedOil" />
                                 <asp:BoundField DataField="FromLocation" HeaderText="From" SortExpression="FromLocation" />
                                 <asp:BoundField DataField="ToLocation" HeaderText="To" SortExpression="ToLocation" />
                                 <asp:BoundField DataField="Notes" HeaderText="Notes" SortExpression="Notes" />

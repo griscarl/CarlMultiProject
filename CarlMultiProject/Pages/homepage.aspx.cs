@@ -13,5 +13,19 @@ namespace ELibraryManagement
         {
 
         }
+
+
+        //User Defined Functions
+        protected void ImageButton_LogbookClick(object sender, EventArgs e)
+        {
+            if(Session["UserId"] == null)
+            {
+                Response.Redirect("UserLogin.aspx");
+            }
+            else
+            {
+                Response.Redirect("NewLogEntry.aspx");
+            }
+        }
     }
 }

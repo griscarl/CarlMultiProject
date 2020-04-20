@@ -21,19 +21,55 @@
                                 </asp:DropDownList>
                             </div>
                         </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 col-xl-3">
+                                <asp:Label Text="Estimated Remaining Fuel" runat="server" />
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_RemainingFuel" Readonly="true" runat="server"></asp:TextBox>
+                                        <div class="input-group-append">
+                                                <span class="input-group-text">l</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-3">
+                                <asp:Label Text="Estimated Remaining Tacho" runat="server" />
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_RemainingTacho" Readonly="true" runat="server"></asp:TextBox>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">h</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xl-3">
+                                <asp:Label Text="Hours to Engine Service" runat="server" />
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_EngineService" ReadOnly="true" runat="server"></asp:TextBox>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">h</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col">
                                 <hr />
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <asp:Label Text="Start Date" runat="server" />
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="TextBox_StartDate" runat="server" TextMode="Date"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <asp:Label Text="Start Time" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group flex-nowrap">
@@ -44,15 +80,13 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <asp:Label Text="End Date" runat="server" />
                                 <div class="form-group">
                                     <asp:TextBox CssClass="form-control" ID="TextBox_EndDate" runat="server" TextMode="Date"></asp:TextBox>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <asp:Label Text="End Time" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group flex-nowrap">
@@ -65,39 +99,36 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <asp:Label Text="Distance" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox CssClass="form-control" ID="TextBox_Distance" runat="server" Placeholder="0.0" TextMode="Number" Step="0.1"></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_Distance" runat="server" Text="0.0" TextMode="Number" Step="0.01"></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">NM</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <asp:Label Text="Fuel" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group flex-nowrap">
                                         <div class="input-group-prepend">
                                             <asp:CheckBox class="form-control" ID="CheckBox_FullTank" Text="Fulltank" runat="server" />
                                         </div>
-                                        <asp:TextBox CssClass="form-control"  ID="TextBox_FuelIntake" runat="server" Placeholder="0.0" TextMode="Number" Step="0.1" ></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control"  ID="TextBox_FuelIntake" runat="server" Text="0.0" TextMode="Number" Step="0.01" ></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">l</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-6 col-xl-3">
                                 <asp:Label Text="TACHO" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox CssClass="form-control" ID="TextBox_Tacho" runat="server" Placeholder="0.0" TextMode="Number" Step="0.1"></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_Tacho" runat="server" Text="0.0" TextMode="Number" Step="0.01"></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">h</span>
                                         </div>
@@ -108,7 +139,7 @@
                                 <asp:Label Text="Oil" runat="server" />
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <asp:TextBox CssClass="form-control" ID="TextBox_OilIntake" runat="server" Placeholder="0.0" TextMode="Number" Step="0.1"></asp:TextBox>
+                                        <asp:TextBox CssClass="form-control" ID="TextBox_OilIntake" runat="server" Text="0.0" TextMode="Number" Step="0.01"></asp:TextBox>
                                         <div class="input-group-append">
                                             <span class="input-group-text">l</span>
                                         </div>
@@ -148,10 +179,19 @@
                         <div class="row">
                             <div class="col-6 mx-auto">
                                 <div class="form-group">
-                                    <asp:Button ID="Button_ConfirmLogEntry" CssClass="form-control btn-success btn-block" runat="server" Text="Confirm Log entry" OnClick="Button_ConfirmLogEntry_Click" />
+                                    <asp:Button ID="Button_ConfirmLogEntry" CssClass="form-control btn-success btn-block btn-lg" runat="server" Text="Confirm Log entry" OnClick="Button_ConfirmLogEntry_Click" />
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:Label Text="Debug-window" runat="server" />
+                                <div class="form-group">
+                                    <asp:TextBox ID="Textbox_Debug" Cssclass="form-control" TextMode="MultiLine" Rows="10" runat="server" ></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
                         <%--<a href="https://www.youtube.com/watch?v=oHg5SJYRHA0" class="btn btn-primary">Login</a>--%>
                     </div>
                 </div>

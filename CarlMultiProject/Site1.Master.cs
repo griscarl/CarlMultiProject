@@ -13,7 +13,7 @@ namespace ELibraryManagement
         {
             if (Session["Username"] != null)
             {
-                label_Username.Text = Session["Username"].ToString()+ " " + Session["UserId"].ToString();
+                //label_Username.Text = Session["Username"].ToString()+ " " + Session["UserId"].ToString();
                 LinkButton_NewLogEntry.Visible = true;
                 LinkButton_ViewLog.Visible = true;
                 LinkButton_Logout.Visible = true;
@@ -26,7 +26,9 @@ namespace ELibraryManagement
 
         protected void Linkbutton_AdminLogin_Click(object sender, EventArgs e)
         {
-            Response.Redirect("AdminLogin.aspx");
+            //Response.Redirect("homepage.aspx");
+
+            Response.Write("<script>alert('Not implemented.');</script>");
         }
 
         protected void Linkbutton_AuthorManagement_Click(object sender, EventArgs e)

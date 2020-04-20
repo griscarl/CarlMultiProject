@@ -28,6 +28,7 @@ namespace CarlMultiProject.Pages
                 } else
                 {
                     Populate_Date_Time();
+                    Populate_Everything();
                 }
 
             }
@@ -38,6 +39,9 @@ namespace CarlMultiProject.Pages
             if (Populate_Ongoing())
             {
 
+            } else
+            {
+                Populate_Everything();
             }
         }
 
@@ -52,6 +56,8 @@ namespace CarlMultiProject.Pages
                 //Response.Write("<script>alert('Exists ongoing! " + "LogEntryId: " + ViewState["LogEntryId"] + "');</script>");
                 Update_Log_Entry(1);
             }
+
+            Response.Redirect("NewLogEntry.aspx");
         }
 
         protected void Button_ConfirmLogEntry_Click(object sender, EventArgs e)
@@ -70,6 +76,8 @@ namespace CarlMultiProject.Pages
                     Update_Log_Entry(0);
                 }
             }
+
+            Response.Redirect("ViewLog.aspx");
         }
 
         protected void Button_SetStartTime_Click(object sender, EventArgs e)
@@ -117,12 +125,17 @@ namespace CarlMultiProject.Pages
                     TextBox_StartTime.Text = dr["DatetimeStart"].ToString().Substring(11, 5);
                     TextBox_EndDate.Text = dr["DatetimeEnd"].ToString().Substring(0, 10); ;
                     TextBox_EndTime.Text = dr["DatetimeEnd"].ToString().Substring(11, 5);
-                    TextBox_Distance.Text = dr["DistanceInNM"].ToString();
-                    TextBox_FuelIntake.Text = dr["FuelIntakeInLiters"].ToString();
+                    TextBox_Distance.Text = dr["DistanceInNM"].ToString().Replace(',','.');
+                    TextBox_FuelIntake.Text = dr["FuelIntakeInLiters"].ToString().Replace(',', '.');
+                    TextBox_Distance.Text = dr["DistanceInNM"].ToString().Replace(',', '.');
+                    TextBox_FuelIntake.Text = dr["FuelIntakeInLiters"].ToString().Replace(',', '.');
+                    TextBox_Tacho.Text = dr["Tacho"].ToString().Replace(',', '.');
+                    TextBox_OilIntake.Text = dr["OilIntake"].ToString().Replace(',', '.');
                     TextBox_FromLocation.Text = dr["FromLocation"].ToString();
                     TextBox_ToLocation.Text = dr["ToLocation"].ToString();
                     TextBox_Notes.Text = dr["Notes"].ToString();
-                    Response.Write("<script>alert('" + dr["FullTank"].ToString() + "');</script>");
+                    //Response.Write("<script>alert('+" + dr["FullTank"].ToString() + "');</script>");
+                    Console.WriteLine($"Distance: {dr["DistanceInNM"].ToString()} Fuelintake: {dr["FuelIntakeInLiters"].ToString()} OilIntake: {dr["OilIntake"].ToString()} Tacho: {dr["Tacho"].ToString()}");
 
                     if (dr["FullTank"].ToString() == "True")
                     {
@@ -157,15 +170,17 @@ namespace CarlMultiProject.Pages
                 string sqlDateTimeStart = TextBox_StartDate.Text + " " + TextBox_StartTime.Text + ":00.000";
                 string sqlDateTimeEnd = TextBox_EndDate.Text + " " + TextBox_EndTime.Text + ":00.000";
                 //string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
-                
+
+                System.Globalization.CultureInfo usCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+
                 //Define the variables in the SqlCommand
                 cmd.Parameters.AddWithValue("@bi", DropDown_Boat.SelectedValue);
                 cmd.Parameters.AddWithValue("@dts", sqlDateTimeStart);
                 cmd.Parameters.AddWithValue("@dte", sqlDateTimeEnd);
-                cmd.Parameters.AddWithValue("@dinm", Math.Round(Convert.ToDecimal(TextBox_Distance.Text), 2));
-                cmd.Parameters.AddWithValue("@fiil", Math.Round(Convert.ToDecimal(TextBox_FuelIntake.Text), 2));
-                cmd.Parameters.AddWithValue("@t", Math.Round(Convert.ToDecimal(TextBox_Tacho.Text), 2));
-                cmd.Parameters.AddWithValue("@oi", Math.Round(Convert.ToDecimal(TextBox_OilIntake.Text), 2));
+                cmd.Parameters.AddWithValue("@dinm", Math.Round(Decimal.Parse(TextBox_Distance.Text, usCulture), 2));
+                cmd.Parameters.AddWithValue("@fiil", Math.Round(Decimal.Parse(TextBox_FuelIntake.Text, usCulture), 2));
+                cmd.Parameters.AddWithValue("@t", Math.Round(Decimal.Parse(TextBox_Tacho.Text, usCulture), 2));
+                cmd.Parameters.AddWithValue("@oi", Math.Round(Decimal.Parse(TextBox_OilIntake.Text, usCulture), 2));
                 cmd.Parameters.AddWithValue("@fl", TextBox_FromLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@tl", TextBox_ToLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@n", TextBox_Notes.Text.Trim());
@@ -192,14 +207,6 @@ namespace CarlMultiProject.Pages
                 Response.Write("<script>alert('" + ex.Message + "');</script>");
                 throw;
             }
-            if (isOngoing == 0) 
-            {
-                Response.Redirect("ViewLog.aspx");
-            } 
-            else
-            {
-                Response.Redirect("NewLogEntry.aspx");
-            }
 
         }
         private void Update_Log_Entry(int isOngoing)
@@ -220,15 +227,17 @@ namespace CarlMultiProject.Pages
                 string sqlDateTimeEnd = TextBox_EndDate.Text + " " + TextBox_EndTime.Text + ":00.000";
                 //string sqlFormattedDate = myDateTime.ToString("yyyy-MM-dd HH:mm:ss.fff");
 
+                System.Globalization.CultureInfo usCulture = System.Globalization.CultureInfo.CreateSpecificCulture("en-US");
+
                 //Define the variables in the SqlCommand
                 cmd.Parameters.AddWithValue("lei", ViewState["LogEntryId"]);
                 cmd.Parameters.AddWithValue("@bi", DropDown_Boat.SelectedValue);
                 cmd.Parameters.AddWithValue("@dts", sqlDateTimeStart);
                 cmd.Parameters.AddWithValue("@dte", sqlDateTimeEnd);
-                cmd.Parameters.AddWithValue("@dinm", Math.Round(Convert.ToDecimal(TextBox_Distance.Text), 2));
-                cmd.Parameters.AddWithValue("@fiil", Math.Round(Convert.ToDecimal(TextBox_FuelIntake.Text), 2));
-                cmd.Parameters.AddWithValue("@t", Math.Round(Convert.ToDecimal(TextBox_Tacho.Text), 2));
-                cmd.Parameters.AddWithValue("@oi", Math.Round(Convert.ToDecimal(TextBox_OilIntake.Text), 2));
+                cmd.Parameters.AddWithValue("@dinm", Math.Round(Decimal.Parse(TextBox_Distance.Text, usCulture), 2));
+                cmd.Parameters.AddWithValue("@fiil", Math.Round(Decimal.Parse(TextBox_FuelIntake.Text, usCulture), 2));
+                cmd.Parameters.AddWithValue("@t", Math.Round(Decimal.Parse(TextBox_Tacho.Text, usCulture), 2));
+                cmd.Parameters.AddWithValue("@oi", Math.Round(Decimal.Parse(TextBox_OilIntake.Text, usCulture), 2));
                 cmd.Parameters.AddWithValue("@fl", TextBox_FromLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@tl", TextBox_ToLocation.Text.Trim());
                 cmd.Parameters.AddWithValue("@n", TextBox_Notes.Text.Trim());
@@ -254,13 +263,6 @@ namespace CarlMultiProject.Pages
             {
                 Response.Write("<script>alert('" + ex.Message + "');</script>");
                 throw;
-            }
-            if (isOngoing == 0)
-            {
-                Response.Redirect("ViewLog.aspx");
-            }
-            {
-                Response.Redirect("NewLogEntry.aspx");
             }
         }
         private bool Validate_Input()
@@ -323,6 +325,57 @@ namespace CarlMultiProject.Pages
             TextBox_EndDate.Text = now.ToString("yyyy-MM-dd");
             TextBox_StartTime.Text = now.ToString("hh:mm");
             TextBox_EndTime.Text = now.ToString("hh:mm");
+        }
+        private void Populate_Everything()
+        {
+            try
+            {
+                
+                SqlConnection con = new SqlConnection(strCon);
+                if (con.State == System.Data.ConnectionState.Closed) //Make sure the connection is open.
+                {
+                    con.Open();
+                }
+
+                //Create the command (Is it possible to simply write a function name here?)
+                SqlCommand cmd = new SqlCommand("EXEC uspGetLogEntryInfo @BoatId", con);
+
+                //Define the variables in the SqlCommand
+                cmd.Parameters.AddWithValue("@BoatId", DropDown_Boat.SelectedValue);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    string msg = "";
+                    TextBox_Tacho.Text = dr["LatestTacho"].ToString().Replace(',', '.');
+                    TextBox_RemainingFuel.Text = dr["FuelLeftInTank"].ToString().Replace(',', '.');
+                    TextBox_RemainingTacho.Text = dr["TachoLeftInTank"].ToString().Replace(',', '.');
+                    TextBox_EngineService.Text = dr["HoursToEngineService"].ToString().Replace(',', '.');
+
+
+                    msg += $"LatestTacho: {dr["LatestTacho"]} ";
+                    msg += $"SumFuel: {dr["SumFuel"]} ";
+                    msg += $"SumTacho: {dr["SumTacho"]} ";
+                    msg += $"FuelPerTacho: {dr["FuelPerTacho"]} ";
+                    msg += $"SumTachoSinceFullTank: {dr["SumTachoSinceFullTank"]} ";
+                    msg += $"FuelUsedSinceFullTank: {dr["FuelUsedSinceFullTank"]} ";
+                    msg += $"FuelCapacity: {dr["FuelCapacity"]} ";
+                    msg += $"FuelLeftInTank: {dr["FuelLeftInTank"]} ";
+                    msg += $"TachoLeftInTank: {dr["TachoLeftInTank"]} ";
+                    msg += $"ServiceInterval: {dr["ServiceInterval"]} ";
+                    msg += $"SumTachoAll: {dr["SumTachoAll"]} ";
+                    msg += $"HoursToEngineService: {dr["HoursToEngineService"]} ";
+
+                    Textbox_Debug.Text = msg;
+
+                }
+                con.Close();
+            }
+            catch (Exception ex)
+            {
+                Response.Write("<script>alert('" + ex.Message + "');</script>");
+                throw;
+            }
         }
 
     }
